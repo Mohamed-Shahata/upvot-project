@@ -9,16 +9,18 @@ export const multerMiddleware = ({
   filePath = "general"
 }) => {
 
-  const destination = path.resolve(`uploads/${filePath}`);
-  if (!fs.existsSync(destination)) {
-    fs.mkdirSync(`uploads/${filePath}`, { recursive: true })
+  const destinationPath = path.resolve(`src/uploads/${filePath}`);
+
+  //path check
+  if (!fs.existsSync(destinationPath)) {
+    fs.mkdirSync(destinationPath, { recursive: true })
   }
 
   // const memoryStorage = multer.memoryStorage()
   //diskStorage
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, destination)
+      cb(null, destinationPath)
     },
     filename: (req, file, cb) => {
       const uniqueFileName = genrateUniqueString(6) + "-" + file.originalname
@@ -28,7 +30,6 @@ export const multerMiddleware = ({
 
   //file filter
   const fileFilter = (req, file, cb) => {
-    console.log({ file });
     if (extensions.includes(file.mimetype.split("/")[1]))
       return cb(null, true)
 

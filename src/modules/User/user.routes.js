@@ -19,7 +19,16 @@ router.delete("/", auth(), expressAsyncHandler(usercontroller.deleteAccount));
 router.post("/upload", multerMiddleware({
   extensions: allowedExtensions.image,
   filePath: "users/profile"
-}).single("profile"), expressAsyncHandler(usercontroller.testMulter))
+}).fields([
+  {
+    name: "profile",
+    maxCount: 1
+  },
+  {
+    name: "cover",
+    maxCount: 2
+  }
+]), expressAsyncHandler(usercontroller.fileUpload))
 
 
 export default router;

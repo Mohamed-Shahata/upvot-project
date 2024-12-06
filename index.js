@@ -9,10 +9,11 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(express.json());
-app.use("/user" , userRouter);
+app.use("/uploads", express.static("src/uploads"))
+app.use("/user", userRouter);
 
 app.use(globalResponse);
 
 db_connection();
 
-app.listen(port , () => console.log("server is life"));
+app.listen(port, () => console.log("server is life"));

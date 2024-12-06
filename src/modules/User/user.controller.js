@@ -84,7 +84,7 @@ export const deleteAccount = async (req, res, next) => {
 }
 
 
-export const testMulter = (req, res, next) => {
+export const fileUpload = (req, res, next) => {
 
-    return res.status(200).json({ message: "User data: ", data: req.file })
+    return res.status(200).json({ message: "User data: ", data: req.files })
 }
