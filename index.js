@@ -1,5 +1,6 @@
 import express from "express";
 import userRouter from "./src/modules/User/user.routes.js";
+import productRouter from "./src/modules/Product/product.routes.js";
 import db_connection from "./DB/connection.js";
 import { config } from "dotenv";
 import { globalResponse } from "./src/middlewares/globalResponse.js";
@@ -10,8 +11,9 @@ const port = process.env.PORT;
 
 app.use(express.json());
 app.use("/uploads", express.static("src/uploads"))
-app.use("/user", userRouter);
 
+app.use("/users", userRouter);
+app.use("/products", productRouter);
 app.use(globalResponse);
 
 db_connection();
