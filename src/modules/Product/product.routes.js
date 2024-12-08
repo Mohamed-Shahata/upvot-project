@@ -12,7 +12,7 @@ router.post(
   cloudinaryUploader({ folderName: "products" }).array("images", 5),
   expressAsyncHandler(productController.addProduct)
 );
-router.post("/like", expressAsyncHandler(productController.addLikeOrUnlikeProduct))
+router.post("/:productId/like-toggle", expressAsyncHandler(productController.addLikeOrUnlikeProduct))
 router.get("/getlikes", expressAsyncHandler(productController.getLikesProduct))
 
 
